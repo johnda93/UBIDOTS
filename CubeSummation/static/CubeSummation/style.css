@@ -19,15 +19,43 @@ main {
     background-color: #BDBDBD;
 }
 
-footer {
-	padding-top: 25px;
+h5 {
+	font-weight: bold;
+	color: #1565C0;
+	text-align: center;
 }
 
-footer h5 {
-	color: #1565C0; 
+main .styled {
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border: 3px #1565C0 solid;
+	background-color: white;
+	margin-top: 30px;
+	margin-bottom: 20px;
+	padding: 20px 30px 20px;
+}
+
+.btn {
+	width: 100%;
+}
+
+main .container .styled {
+	width: 100%;
+	display: none;
+}
+
+footer {
+	padding-top: 25px;
 }
 
 .color_bar {
 	padding: 5px;
 	background-color: #1565C0;
+}
+
+.toast_error {
+	background-color: white;
+	color: #D50000;
+	border: 2px #D50000 solid;
 }
