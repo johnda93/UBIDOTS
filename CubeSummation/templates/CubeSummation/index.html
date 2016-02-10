@@ -1,8 +1,14 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
 	<title>CubeSummation - UBIDOTS</title>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+	<link rel="stylesheet" href="{% static "CubeSummation/style.css" %}">
+
 	<!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
@@ -20,5 +26,9 @@
 	<footer>
 
 	</footer>
+
+	<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+  	<script src="{% static "CubeSummation/script.js" %}"></script>
 </body>
 </html>
