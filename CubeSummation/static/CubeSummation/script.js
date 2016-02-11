@@ -17,6 +17,7 @@ $('#go_btn').on('click', function () {
 
 		Materialize.toast('Please enter a valid number of test cases', 4000, 'rounded toast_error');
 	} else {
+		$test_cases.attr('readonly', true);
 		$('#go_btn').addClass('disabled');
 		$('#reset_btn').removeClass('disabled');
 
@@ -31,25 +32,23 @@ function createTestCases (number_test_cases) {
 		$aux_class = '';
 
 		if (i === 1) {
-			$aux_class = ' active';
+			$aux_class = 'actived';
 		}
 
-		$div_test_case = '<div class="col l5 s12' + $aux_class + '">' +
-	  						'<div id="test_case_' + i + '" class="styled container">' +
-	  							'<h5>Test Case #' + i +
-	  								'<div>' + 
-	  									'<a id="next_btn" href="#"><i class="material-icons center">chevron_left</i></a>' +
-	  									'1 / ' + number_test_cases +
-	  									'<a id="prev_btn" href="#"><i class="material-icons center">chevron_right</i></a>' + 
-	  								'</div>' + 
-	  							'</h5>'
+		$div_test_case = '<div class="col l6 s12">' +
+	  						'<div id="test_case_' + i + '" class="' + $aux_class + ' styled container">' +
+	  							'<h5>' + 
+	  								'<a class="prev_btn" href="#"><i class="material-icons center">chevron_left</i></a>' +
+		  							'Test Case #' + i +
+			  						'<a class="next_btn" href="#"><i class="material-icons center">chevron_right</i></a>' +
+			  					'</h5>' + 
 	  						'</div>' +
 	  					  '</div>';
 
 		$row_test_cases.append($div_test_case);
 	}
 
-	$div_test_case = '<div class="col l5 offset-l2 s12">' +
+	$div_test_case = '<div class="col l5 offset-l1 s12">' +
 	  					'<div id="results" class="styled container">' +
 	  						'<h5>Results!</h5>' + 
 	  					'</div>' +
@@ -60,3 +59,45 @@ function createTestCases (number_test_cases) {
 	$('#test_case_1').show();
 	$('#results').show();
 }
+
+$('#row_test_cases').on('click', '.actived .prev_btn', function (event) {
+	event.preventDefault();
+
+	$active_test_case = $('.actived');
+	$id = $active_test_case.attr('id');
+
+	if ($id === "test_case_1") {
+		return;
+	} else {
+		$active_test_case.removeClass('actived');
+		$active_test_case.hide();
+
+		$next_number = parseInt($id.split("_")[2]);
+
+		$next_test_case = $('#test_case_' + --$next_number);
+		$next_test_case.addClass('actived');
+		$next_test_case.show();
+	}
+	
+});
+
+$('#row_test_cases').on('click', '.actived .next_btn', function (event) {
+	event.preventDefault();
+
+	$active_test_case = $('.actived');
+	$id = $active_test_case.attr('id');
+	$number_test_cases = $('#test_cases').val();
+
+	if ($id === "test_case_" + $number_test_cases) {
+		return;
+	} else {
+		$active_test_case.removeClass('actived');
+		$active_test_case.hide();
+
+		$next_number = parseInt($id.split("_")[2]);
+
+		$next_test_case = $('#test_case_' + ++$next_number);
+		$next_test_case.addClass('actived');
+		$next_test_case.show();
+	}
+});

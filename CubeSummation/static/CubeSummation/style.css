@@ -32,8 +32,7 @@ main .styled {
 	border: 3px #1565C0 solid;
 	background-color: white;
 	margin-top: 30px;
-	margin-bottom: 20px;
-	padding: 20px 30px 20px;
+	padding: 10px 30px 10px;
 }
 
 .btn {
@@ -45,8 +44,8 @@ main .container .styled {
 	display: none;
 }
 
-h5 div {
-	float: right;
+h5 a i{
+	vertical-align: middle;
 }
 
 footer {
