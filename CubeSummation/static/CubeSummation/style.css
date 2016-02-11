@@ -45,6 +45,10 @@ main .container .styled {
 	display: none;
 }
 
+h5 div {
+	float: right;
+}
+
 footer {
 	padding-top: 25px;
 }
