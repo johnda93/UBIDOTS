@@ -37,7 +37,12 @@ function createTestCases (number_test_cases) {
 		$div_test_case = '<div class="col l5 s12' + $aux_class + '">' +
 	  						'<div id="test_case_' + i + '" class="styled container">' +
 	  							'<h5>Test Case #' + i +
-	  								'<div><a href="#"><i class="material-icons center">chevron_left</i></a>' + '1 / ' + number_test_cases + '<a href="#"><i class="material-icons center">chevron_right</i></a></h5></div>'
+	  								'<div>' + 
+	  									'<a id="next_btn" href="#"><i class="material-icons center">chevron_left</i></a>' +
+	  									'1 / ' + number_test_cases +
+	  									'<a id="prev_btn" href="#"><i class="material-icons center">chevron_right</i></a>' + 
+	  								'</div>' + 
+	  							'</h5>'
 	  						'</div>' +
 	  					  '</div>';
 
