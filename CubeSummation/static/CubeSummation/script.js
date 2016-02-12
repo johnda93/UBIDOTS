@@ -35,20 +35,35 @@ function createTestCases (number_test_cases) {
 			$aux_class = 'actived';
 		}
 
-		$div_test_case = '<div class="col l6 s12">' +
+		$div_test_case = '<div class="col l5 s12">' +
 	  						'<div id="test_case_' + i + '" class="' + $aux_class + ' styled container">' +
 	  							'<h5>' + 
 	  								'<a class="prev_btn" href="#"><i class="material-icons center">chevron_left</i></a>' +
 		  							'Test Case #' + i +
 			  						'<a class="next_btn" href="#"><i class="material-icons center">chevron_right</i></a>' +
-			  					'</h5>' + 
+			  					'</h5>' +
+			  					'<div class="row">' +
+			  						'<div class="input-field col s12">' +
+					  					'<input placeholder="" id="matrix_size" type="number" min="1" max="100" class="validate">' +
+		          						'<label for="matrix_size">3-D Matrix Size</label>' +
+	          						'</div>' +
+	          						'<div class="input-field col s12">' +
+		          						'<input placeholder="" id="op_number" type="number" min="1" max="1000" class="validate">' +
+		          						'<label for="op_number">Number of operations</label>' +
+	          						'</div>' +
+	          						'<div class="input-field col s12">' +
+		          						'<textarea id="operations" class="materialize-textarea"></textarea>' +
+		          						'<label for="operations">Operations</label>' +
+	          						'</div>' +
+          						'</div>' +
 	  						'</div>' +
 	  					  '</div>';
 
 		$row_test_cases.append($div_test_case);
 	}
 
-	$div_test_case = '<div class="col l5 offset-l1 s12">' +
+	$div_test_case = '</form>' +
+					 '<div class="col l5 offset-l2 s12">' +
 	  					'<div id="results" class="styled container">' +
 	  						'<h5>Results!</h5>' + 
 	  					'</div>' +
