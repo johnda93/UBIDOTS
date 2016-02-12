@@ -28,10 +28,9 @@
 
 			<ol>
 				<li>Select the number of test cases and press the button "Go!"</li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
+				<li>Complete the fields in each of the test cases, cicling through them with the arrows in the title</li>
+				<li>Press the button "Resolve!" and see the results at the right of the page</li>
+				<li>Press the button "Reset" if you want to start again</li>
 			</ol>
 
 			<div class="row">
@@ -51,18 +50,34 @@
   				</div>
 
   				<div class="col s2 offset-s2">
-  					<a id="reset_btn" class="waves-effect waves-light btn blue darken-3 disabled">Reset</a>
+  					<a id="reset_btn" class="waves-effect waves-light btn blue darken-3 modal-trigger disabled" href="#modal_reset">Reset</a>
   				</div>
   			</div>
 		</div>
 
 		<div class="container">
-			<div id="row_test_cases" class="row">
-				<form action="/CubeSummation/" method="POST">
+			<div id="row_test_cases" class="row"></div>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col s2 offset-s1">
+					<a id="resolve" class="waves-effect waves-light btn blue darken-3">Resolve!</a>
+				</div>
 			</div>
 		</div>
-		
 	</main>
+
+	<div id="modal_reset" class="modal">
+		<div class="modal_content">
+			<h5>Reset Cube Summation</h5>
+			<p>Are you sure you want to reset the application? You will lose all the progress!</p>
+		</div>
+		<div class="modal-footer">
+			<a class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">No</a>
+			<a id="confirm_reset" class="modal-action modal-close waves-effect waves-green btn-flat" href="#!">Yes</a>
+		</div>
+	</div>
 
 	<div class="color_bar"></div>
 

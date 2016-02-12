@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	$('select').material_select();
+	$('.modal-trigger').leanModal();
 });
 
 $('#go_btn').on('click', function () {
@@ -44,15 +44,15 @@ function createTestCases (number_test_cases) {
 			  					'</h5>' +
 			  					'<div class="row">' +
 			  						'<div class="input-field col s12">' +
-					  					'<input placeholder="" id="matrix_size" type="number" min="1" max="100" class="validate">' +
+					  					'<input placeholder="" id="matrix_size_' + i + '" type="number" min="1" max="100" class="validate">' +
 		          						'<label for="matrix_size">3-D Matrix Size</label>' +
 	          						'</div>' +
 	          						'<div class="input-field col s12">' +
-		          						'<input placeholder="" id="op_number" type="number" min="1" max="1000" class="validate">' +
+		          						'<input placeholder="" id="op_number_' + i + '" type="number" min="1" max="1000" class="validate">' +
 		          						'<label for="op_number">Number of operations</label>' +
 	          						'</div>' +
 	          						'<div class="input-field col s12">' +
-		          						'<textarea id="operations" class="materialize-textarea"></textarea>' +
+		          						'<textarea id="operations_' + i + '" class="materialize-textarea"></textarea>' +
 		          						'<label for="operations">Operations</label>' +
 	          						'</div>' +
           						'</div>' +
@@ -62,17 +62,23 @@ function createTestCases (number_test_cases) {
 		$row_test_cases.append($div_test_case);
 	}
 
-	$div_test_case = '</form>' +
-					 '<div class="col l5 offset-l2 s12">' +
-	  					'<div id="results" class="styled container">' +
+	$div_test_case = '<div class="col l5 offset-l2 s12">' +
+	  					'<div id="results_div" class="styled container">' +
 	  						'<h5>Results!</h5>' + 
+	  						'<div class="row">' +
+		  						'<div class="input-field col s12">' +
+			          				'<textarea id="results" class="materialize-textarea"></textarea>' +
+			          				'<label for="results">Results</label>' +
+		          				'</div>' +
+	          				'</div>'
 	  					'</div>' +
 	  				 '</div>';
 
 	$row_test_cases.append($div_test_case);
 
 	$('#test_case_1').show();
-	$('#results').show();
+	$('#results_div').show();
+	$('#resolve').show();
 }
 
 $('#row_test_cases').on('click', '.actived .prev_btn', function (event) {
@@ -115,4 +121,57 @@ $('#row_test_cases').on('click', '.actived .next_btn', function (event) {
 		$next_test_case.addClass('actived');
 		$next_test_case.show();
 	}
+});
+
+$('#resolve').on('click', function (event) {
+	event.preventDefault();
+	$number_test_cases = $('#test_cases').val();
+	$final_string = "";
+
+	for (var i = 1; i <= $number_test_cases; i++) {
+		$operations = $('#operations_' + i).val().split("\n");
+		$update_array = [];
+
+		$.each($operations, function (index, operation) {
+            $operation_tokens = operation.split(" ");
+
+            if ($operation_tokens[0] === "UPDATE") {
+            	$update_array.push({
+            		x : parseInt($operation_tokens[1]),
+            		y : parseInt($operation_tokens[2]),
+            		z : parseInt($operation_tokens[3]),
+            		value : parseInt($operation_tokens[4])
+            	});
+            } else {
+            	$total_sum = 0;
+
+            	$.each($update_array, function (index, coordinate) {
+            		$x1 = parseInt($operation_tokens[1]);
+            		$y1 = parseInt($operation_tokens[2]);
+            		$z1 = parseInt($operation_tokens[3]);
+            		$x2 = parseInt($operation_tokens[4]);
+            		$y2 = parseInt($operation_tokens[5]);
+            		$z2 = parseInt($operation_tokens[6]);
+
+            		if ((coordinate.x >= $x1 && coordinate.x <= $x2) && (coordinate.y >= $y1 && coordinate.y <= $y2) && (coordinate.z >= $z1 && coordinate.z <= $z2)) {
+            			$total_sum += coordinate.value;
+            		}
+            	});
+
+            	$final_string += $total_sum + "\n";
+            }
+        });
+	}
+
+	$('#results').val($final_string);
+	$('#results').trigger('autoresize');
+	$('#results').parent().find('label').addClass('active');
+});
+
+$('#modal_reset').on('click', '#confirm_reset',function () {
+	$('#row_test_cases').html("");
+	$test_cases.attr('readonly', false);
+	$('#go_btn').removeClass('disabled');
+	$('#reset_btn').addClass('disabled');
+	$('#resolve').hide();
 });

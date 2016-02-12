@@ -48,6 +48,10 @@ h5 a i{
 	vertical-align: middle;
 }
 
+#resolve {
+	display: none;
+}
+
 footer {
 	padding-top: 25px;
 }
