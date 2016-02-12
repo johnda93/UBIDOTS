@@ -1,4 +1,6 @@
 $(document).ready(function () {
+
+	//Activate the Reset modal functionality
 	$('.modal-trigger').leanModal();
 });
 
@@ -6,6 +8,8 @@ $('#go_btn').on('click', function () {
 	$test_cases = $('#test_cases');
 	$test_cases_label = $test_cases.parent().parent().parent().find('label');
 
+	//These are validations for the Number of Test Cases Input
+	//The adding or removal of classes and attributes are for the special effects of the input fields
 	if ($test_cases.val().length === 0) {
 		$test_cases.addClass('invalid');
         $test_cases_label.addClass('active');
@@ -25,6 +29,8 @@ $('#go_btn').on('click', function () {
 	}
 });
 
+//This is the function where the containers for the test cases are created, and the results container as well
+//The "actived" class if used to know which test case is the one visible at the time
 function createTestCases (number_test_cases) {
 	$row_test_cases = $('#row_test_cases');
 
@@ -81,6 +87,7 @@ function createTestCases (number_test_cases) {
 	$('#resolve').show();
 }
 
+//Arrow button functionality to navigate through test cases
 $('#row_test_cases').on('click', '.actived .prev_btn', function (event) {
 	event.preventDefault();
 
@@ -99,9 +106,9 @@ $('#row_test_cases').on('click', '.actived .prev_btn', function (event) {
 		$next_test_case.addClass('actived');
 		$next_test_case.show();
 	}
-	
 });
 
+//Arrow button functionality to navigate through test cases
 $('#row_test_cases').on('click', '.actived .next_btn', function (event) {
 	event.preventDefault();
 
@@ -123,6 +130,11 @@ $('#row_test_cases').on('click', '.actived .next_btn', function (event) {
 	}
 });
 
+//Resolve! button functionality
+//For each test case, a foreach loop is implemented for each of the operations identified by the split function
+//Next, if the operation is an UPDATE, the coords and the values are stored in an array of JSON objects
+//Or, if the operation is a QUERY, the array of JSON coords are analyzed to see if they are in the threshold given in the QUERY
+//and decide if it will be sumed or not. Finally, the results textarea is updated
 $('#resolve').on('click', function (event) {
 	event.preventDefault();
 	$number_test_cases = $('#test_cases').val();
@@ -168,7 +180,8 @@ $('#resolve').on('click', function (event) {
 	$('#results').parent().find('label').addClass('active');
 });
 
-$('#modal_reset').on('click', '#confirm_reset',function () {
+//Modal confirmation for resetting the application. Returns to the initial state
+$('#modal_reset').on('click', '#confirm_reset', function () {
 	$('#row_test_cases').html("");
 	$test_cases.attr('readonly', false);
 	$('#go_btn').removeClass('disabled');
